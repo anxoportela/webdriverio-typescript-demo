@@ -35,8 +35,7 @@ Este proyecto tiene como objetivo mostrar cómo automatizar pruebas web utilizan
 La estructura del proyecto es la siguiente:
 
 ```bash
-webdriverio-typescript-demo/
-├── node_modules/               # Dependencias instaladas
+webdriverio-typescript-demo/             # Dependencias instaladas
 ├── wdio.conf.ts                # Configuración de WebDriverIO en TypeScript
 ├── package.json                # Configuración del proyecto
 ├── tsconfig.json               # Configuración de TypeScript
