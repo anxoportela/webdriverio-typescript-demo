@@ -1,12 +1,15 @@
-### **🔍 Kata Básica: Abrir la Página y Verificar el Título**
+### **🔍 Kata de Login: Iniciar Sesión en SauceDemo**
 
 #### 📑 Instrucciones
 
-1. **Objetivo**: Abre la página principal de **SauceDemo** y verifica que el título sea correcto.
+1. **Objetivo**: Inicia sesión en SauceDemo con credenciales válidas.
 2. **URL**: `https://www.saucedemo.com/`
-3. **Pasos**:
-   - Navega a la página principal.
-   - Valida que el título contenga la palabra **"Swag Labs"**.
+3. **Credenciales**:
+   - **Usuario**: `standard_user`
+   - **Contraseña**: `secret_sauce`
+4. **Pasos**:
+   - Inicia sesión con las credenciales proporcionadas.
+   - Valida que seas redirigido al inventario.
 
 #### 📥 Respuesta
 
@@ -16,11 +19,14 @@
 ```typescript
 import { expect } from "@wdio/globals";
 
-describe("Página de inicio", () => {
-  it("Debería tener el título correcto", async () => {
-    await browser.url("https://www.saucedemo.com/");
-    const title: string = await browser.getTitle();
-    expect(title).toHaveText("Swag Labs");
+describe('Iniciar sesión en SauceDemo', () => {
+  it('Debería iniciar sesión con éxito', async () => {
+    await browser.url('https://www.saucedemo.com/');
+    await $('#user-name').setValue('standard_user');
+    await $('#password').setValue('secret_sauce');
+    await $('#login-button').click();
+
+    await expect(await browser.getUrl()).toMatch(/inventory\.html/);
   });
 });
 ```
