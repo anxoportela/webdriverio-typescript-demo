@@ -1,15 +1,14 @@
-### **🔍 Kata de Carrito de Compras: Añadir Producto al Carrito**
+### **🔍 Kata de Validación de Productos: Verificar Precios y Nombres**
 
 #### 📑 Instrucciones
 
-1. **Objetivo**: Añade un producto al carrito y verifica que el contador del carrito se actualice.
+1. **Objetivo**: Valida que los productos tengan precios y nombres visibles.
 2. **URL**: `https://www.saucedemo.com/`
 3. **Pasos**:
    - Inicia sesión.
-   - Selecciona un producto y agrégalo al carrito.
-   - Valida que el carrito muestre "1".
+   - Verifica que cada producto tenga un nombre y un precio con formato **$X.XX**.
 
-### 📥 Respuesta
+#### 📥 Respuesta
 
 <details>
   <summary>Haz clic aquí para ver la respuesta</summary>
@@ -17,19 +16,24 @@
 ```typescript
 import { expect } from "@wdio/globals";
 
-describe('Carrito de compras', () => {
-  it('Debería añadir un producto al carrito', async () => {
+describe('Validación de productos', () => {
+  it('Debería mostrar precios y nombres de productos', async () => {
     await browser.url('https://www.saucedemo.com/');
     await $('#user-name').setValue('standard_user');
     await $('#password').setValue('secret_sauce');
     await $('#login-button').click();
 
-    await $('.inventory_item button').click();
-    const cartBadge = await $('.shopping_cart_badge');
+    const items = await $$('.inventory_item');
+    for await (const item of items) {
+      const name = await item.$('.inventory_item_name').getText();
+      const price = await item.$('.inventory_item_price').getText();
 
-    await expect(cartBadge).toHaveText('1');
+      expect(name).not.toBe("");
+      expect(/^\$\d+\.\d{2}$/.test(price)).toBe(true);
+    }
   });
 });
+
 ```
 
 </details>
