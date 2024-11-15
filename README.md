@@ -10,7 +10,7 @@
    - Ingresa información de envío y finaliza la compra.
    - Verifica el mensaje de confirmación.
 
-### 📥 Respuesta
+#### 📥 Respuesta
 
 <details>
   <summary>Haz clic aquí para ver la respuesta</summary>
