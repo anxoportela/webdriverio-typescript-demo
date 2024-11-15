@@ -9,7 +9,7 @@
    - Selecciona un producto y agrégalo al carrito.
    - Valida que el carrito muestre "1".
 
-### 📥 Respuesta
+#### 📥 Respuesta
 
 <details>
   <summary>Haz clic aquí para ver la respuesta</summary>
