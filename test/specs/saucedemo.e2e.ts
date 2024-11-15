@@ -1,23 +1,22 @@
 import { expect } from "@wdio/globals";
 
-describe('Proceso de compra', () => {
-  it('Debería completar una compra', async () => {
+describe('Pruebas de componentes del header', () => {
+  it('Debería mostrar el logo, funcionar el menú de usuario y mostrar el carrito', async () => {
     await browser.url('https://www.saucedemo.com/');
     await $('#user-name').setValue('standard_user');
     await $('#password').setValue('secret_sauce');
     await $('#login-button').click();
 
-    await $('.inventory_item button').click();
-    await $('.shopping_cart_link').click();
-    await $('#checkout').click();
+    // Verificar que el logo esté visible
+    await expect($('.app_logo')).toBeDisplayed();
 
-    await $('#first-name').setValue('Juan');
-    await $('#last-name').setValue('Pérez');
-    await $('#postal-code').setValue('12345');
-    await $('#continue').click();
-    await $('#finish').click();
+    // Abrir y cerrar el menú de usuario
+    await $('#react-burger-menu-btn').click();
+    await expect($('#logout_sidebar_link')).toBeDisplayed();
+    await $('#react-burger-cross-btn').click();
+    await expect($('#logout_sidebar_link')).not.toBeDisplayed();
 
-    const confirmationMessage: string = await $('.complete-header').getText();
-    expect(confirmationMessage).toHaveText('THANK YOU FOR YOUR ORDER');
+    // Verificar que el carrito esté visible
+    await expect($('.shopping_cart_link')).toBeDisplayed();
   });
 });
