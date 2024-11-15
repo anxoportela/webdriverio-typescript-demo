@@ -1,19 +1,23 @@
 import { expect } from "@wdio/globals";
 
-describe('Validación de productos', () => {
-  it('Debería mostrar precios y nombres de productos', async () => {
+describe('Proceso de compra', () => {
+  it('Debería completar una compra', async () => {
     await browser.url('https://www.saucedemo.com/');
     await $('#user-name').setValue('standard_user');
     await $('#password').setValue('secret_sauce');
     await $('#login-button').click();
 
-    const items = await $$('.inventory_item');
-    for await (const item of items) {
-      const name = await item.$('.inventory_item_name').getText();
-      const price = await item.$('.inventory_item_price').getText();
+    await $('.inventory_item button').click();
+    await $('.shopping_cart_link').click();
+    await $('#checkout').click();
 
-      expect(name).not.toBe("");
-      expect(/^\$\d+\.\d{2}$/.test(price)).toBe(true);
-    }
+    await $('#first-name').setValue('Juan');
+    await $('#last-name').setValue('Pérez');
+    await $('#postal-code').setValue('12345');
+    await $('#continue').click();
+    await $('#finish').click();
+
+    const confirmationMessage: string = await $('.complete-header').getText();
+    expect(confirmationMessage).toHaveText('THANK YOU FOR YOUR ORDER');
   });
 });
