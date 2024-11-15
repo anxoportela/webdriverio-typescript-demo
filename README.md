@@ -1,12 +1,13 @@
-### **🔍 Kata de Manejo de Errores: Verificar Mensaje de Error en Login Fallido**
+### **🔍 Kata Avanzada: Validar Orden de Productos**
 
 #### 📑 Instrucciones
 
-1. **Objetivo**: Verifica el mensaje de error al usar credenciales incorrectas.
+1. **Objetivo**: Ordena los productos por precio de menor a mayor y valida el orden.
 2. **URL**: `https://www.saucedemo.com/`
 3. **Pasos**:
-   - Intenta iniciar sesión con credenciales incorrectas.
-   - Valida que se muestre un mensaje de error adecuado.
+   - Inicia sesión.
+   - Ordena los productos por precio ascendente.
+   - Verifica que los precios estén en orden.
 
 #### 📥 Respuesta
 
@@ -16,18 +17,28 @@
 ```typescript
 import { expect } from "@wdio/globals";
 
-describe('Manejo de errores en login', () => {
-  it('Debería mostrar un mensaje de error para credenciales incorrectas', async () => {
-    await browser.url('https://www.saucedemo.com/');
-    await $('#user-name').setValue('incorrect_user');
-    await $('#password').setValue('wrong_password');
-    await $('#login-button').click();
-
-    const errorMessage = await $('.error-message-container').getText();
-    expect(errorMessage).toContain('Username and password do not match');
+describe("Validar orden de productos", () => {
+  it("Debería ordenar productos de menor a mayor precio", async () => {
+    await browser.url("https://www.saucedemo.com/");
+    await $("#user-name").setValue("standard_user");
+    await $("#password").setValue("secret_sauce");
+    await $("#login-button").click();
+    await $(".product_sort_container").selectByVisibleText(
+      "Price (low to high)"
+    );
+    const prices = await $$(".inventory_item_price");
+    const priceValues: number[] = [];
+    for (let i = 0; i < prices.getElements.length; i++) {
+      const priceText = await prices[i].getText();
+      const price = parseFloat(priceText.replace("$", "").trim());
+      priceValues.push(price);
+    }
+    const isSorted = priceValues.every(
+      (val, i, arr) => !i || arr[i - 1] <= val
+    );
+    expect(isSorted).toBe(true);
   });
 });
-
 
 ```
 
