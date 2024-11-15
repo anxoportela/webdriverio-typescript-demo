@@ -1,14 +1,12 @@
-### **🔍 Kata de Pruebas de Componentes: Validar Funcionalidades del Header**
+### **🔍 Kata de Manejo de Errores: Verificar Mensaje de Error en Login Fallido**
 
 #### 📑 Instrucciones
 
-1. **Objetivo**: Verifica que los elementos del header (logo, menú de usuario, carrito) funcionen correctamente.
+1. **Objetivo**: Verifica el mensaje de error al usar credenciales incorrectas.
 2. **URL**: `https://www.saucedemo.com/`
 3. **Pasos**:
-   - Inicia sesión.
-   - Verifica que el logo sea visible.
-   - Haz clic en el menú de usuario y verifica que se abra y cierre correctamente.
-   - Verifica que el icono del carrito esté visible.
+   - Intenta iniciar sesión con credenciales incorrectas.
+   - Valida que se muestre un mensaje de error adecuado.
 
 #### 📥 Respuesta
 
@@ -18,26 +16,18 @@
 ```typescript
 import { expect } from "@wdio/globals";
 
-describe('Pruebas de componentes del header', () => {
-  it('Debería mostrar el logo, funcionar el menú de usuario y mostrar el carrito', async () => {
+describe('Manejo de errores en login', () => {
+  it('Debería mostrar un mensaje de error para credenciales incorrectas', async () => {
     await browser.url('https://www.saucedemo.com/');
-    await $('#user-name').setValue('standard_user');
-    await $('#password').setValue('secret_sauce');
+    await $('#user-name').setValue('incorrect_user');
+    await $('#password').setValue('wrong_password');
     await $('#login-button').click();
 
-    // Verificar que el logo esté visible
-    await expect($('.app_logo')).toBeDisplayed();
-
-    // Abrir y cerrar el menú de usuario
-    await $('#react-burger-menu-btn').click();
-    await expect($('#logout_sidebar_link')).toBeDisplayed();
-    await $('#react-burger-cross-btn').click();
-    await expect($('#logout_sidebar_link')).not.toBeDisplayed();
-
-    // Verificar que el carrito esté visible
-    await expect($('.shopping_cart_link')).toBeDisplayed();
+    const errorMessage = await $('.error-message-container').getText();
+    expect(errorMessage).toContain('Username and password do not match');
   });
 });
+
 
 ```
 
