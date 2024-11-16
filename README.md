@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 ### **🔍 Kata de Manejo de Errores: Verificar Mensaje de Error en Login Fallido**
 
 #### 📑 Instrucciones
