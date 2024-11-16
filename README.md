@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 ### **🔍 Kata de Proceso de Checkout: Completar una Compra**
 
 #### 📑 Instrucciones
