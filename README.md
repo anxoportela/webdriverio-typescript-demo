@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 ### **🔍 Kata de Login: Iniciar Sesión en SauceDemo**
 
 #### 📑 Instrucciones
