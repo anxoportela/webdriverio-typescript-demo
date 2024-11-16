@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 ### **🔍 Kata de Validación de Productos: Verificar Precios y Nombres**
 
 #### 📑 Instrucciones
