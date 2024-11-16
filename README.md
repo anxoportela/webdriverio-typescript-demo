@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 ### **🔍 Kata Básica: Abrir la Página y Verificar el Título**
 
 #### 📑 Instrucciones
