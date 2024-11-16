@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 ### **🔍 Kata de Carrito de Compras: Añadir Producto al Carrito**
 
 #### 📑 Instrucciones
