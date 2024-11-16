@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 ### **🔍 Kata Avanzada: Validar Orden de Productos**
 
 #### 📑 Instrucciones
